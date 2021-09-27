@@ -1,0 +1,24 @@
+<div *ngIf="page.container.id" id="{{page.container.id}}" class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
+      <ul class="navbar-nav">
+        <div *ngFor="let item of navigations">
+          <li class="nav-item active">
+            <a class="nav-link" href="/page/{{item.destinationPageId}}">{{item.name}}</a>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </nav>
+
+  <div *ngFor="let rows of page.container.rowElements" class="row">
+    <div *ngFor="let item2 of rows.colElements" class="col">
+      One of three columns
+    </div>
+  </div>
+</div>
+<app-text></app-text>
