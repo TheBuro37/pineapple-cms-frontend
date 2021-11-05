@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {PageDto} from "../dto/PageDto";
-import {NavigationDto} from "../dto/NavigationDto";
 import {HttpService} from "../http.service";
 import {Title} from "@angular/platform-browser";
 import {ActivatedRoute} from "@angular/router";
+import {Page} from "../model/page/Page";
+import {Navigation} from "../model/page/Navigation";
+import {RowElement} from "../model/page/element/RowElement";
 
 @Component({
   selector: 'app-page',
@@ -12,13 +13,13 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class PageComponent implements OnInit {
 
-  constructor(private httpService: HttpService,private titleService: Title, private route: ActivatedRoute) { }
-
   public id: string | null | undefined;
+  public page: Page;
+  public navigations: Navigation[] = [];
 
-  page : PageDto | any;
-
-  navigations: NavigationDto[] | any;
+  constructor(private httpService: HttpService,private titleService: Title, private route: ActivatedRoute) {
+    this.page = new Page();
+  }
 
   ngOnInit():void {
 
@@ -27,20 +28,22 @@ export class PageComponent implements OnInit {
     if(this.id != null)
     {
       this.httpService.getPageById(this.id).subscribe(value => {
-        this.page = value;
-
-        this.titleService.setTitle(this.page.name);
-
+        this.page = Object.assign(new Page(), value);
       },error => {
         console.log(error);
       },() => {
 
       });
 
-      this.httpService.getNavigations().subscribe(value => {
-        this.navigations = value;
-      },error => {
+      this.httpService.getNavigations().subscribe(navigationItems => {
+        navigationItems.forEach(item => {
+          this.navigations.push(Object.assign(new Navigation(), item));
+        });
 
+
+        console.log( this.navigations)
+      },error => {
+        console.log(error);
       },() => {
 
       });
