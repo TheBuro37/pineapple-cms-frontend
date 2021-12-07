@@ -1,6 +1,8 @@
-import {RowElement} from "./RowElement";
-
+import {TextElement} from "./TextElement";
+import {ImageElement} from "./ImageElement";
 export class ColElement {
   id: String = "";
-  rowElements: RowElement[] = [];
+  textElement: TextElement = new TextElement();
+  imageElement: ImageElement = new ImageElement();
+  elementType = "";
 }

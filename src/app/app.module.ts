@@ -5,13 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { PageComponent } from './page/page.component';
-import { TextComponent } from './page/text/text.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageComponent,
-    TextComponent
+    PageComponent
   ],
   imports: [
     BrowserModule,
@@ -22,3 +20,4 @@ import { TextComponent } from './page/text/text.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+ 

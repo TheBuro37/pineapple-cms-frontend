@@ -16,10 +16,16 @@
   </nav>
 
 
-  <div *ngFor="let rows of page.container.rowElements" class="row">
-    <div *ngFor="let item2 of rows.colElements" class="col">
-      One of three columns
+  <div *ngFor="let row of page.container.rowElements" id="{{row.id}}" class="row">
+    <div *ngFor="let col of row.colElements" id="{{col.id}}" class="col">
+      <ng-container *ngIf="col.elementType == 'Text'">
+      <p id="{{col.textElement.id}}">{{col.textElement.text}}</p>
+      </ng-container>
+
+      <ng-container *ngIf="col.elementType == 'Image'">
+      <img id="{{col.imageElement.id}}" src="{{col.imageElement.src}}">
+      </ng-container>
+
     </div>
   </div>
 </div>
-<app-text></app-text>
